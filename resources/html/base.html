@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to rocket-link</title>
+    <title>Rocket Link</title>
 
     <!-- styles -->
     {% style """/assets/bulma/css/bulma.min.css" %}
@@ -16,7 +16,7 @@
       <nav class="navbar is-info">
           <div class="container">
               <div class="navbar-brand">
-                  <a class="navbar-item" href="/" style="font-weight:bold;">rocket-link</a>
+                  <a class="navbar-item" href="/" style="font-weight:bold;">Rocket Link</a>
                   <span class="navbar-burger burger" data-target="nav-menu">
                       <span></span>
                       <span></span>
@@ -25,8 +25,7 @@
               </div>
               <div id="nav-menu" class="navbar-menu">
                   <div class="navbar-start">
-                      <a href="/" class="navbar-item{% ifequal page "home.html" %} is-active{%endifequal%}">Home</a>
-                      <a href="/about" class="navbar-item{% ifequal page "about.html" %} is-active{%endifequal%}">About</a>
+                      <a href="/" class="navbar-item{% ifequal page "index.html" %} is-active{%endifequal%}">Create link</a>
                   </div>
               </div>
           </div>
