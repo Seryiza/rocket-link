@@ -7,6 +7,8 @@ pom.xml
 *.jar
 *.class
 /.lein-*
+/.lsp
+/.clj-kondo
 profiles.clj
 /.env
 .nrepl-port
