@@ -9,6 +9,9 @@
 (defn init-app []
   (mount/start))
 
+(defn make-project-url [& components]
+  (apply str (:base-url config) components))
+
 (defn index-page-handler [request]
   (render request "index.html"))
 
@@ -17,8 +20,7 @@
 
 (defn show-created-link-handler [request]
   (let [code-name (-> request :path-params :code-name)
-        base-url (:base-url config)
-        created-link (str base-url "/to/" code-name)]
+        created-link (make-project-url "/to/" code-name)]
     (render request "links/created.html" {:created-link created-link})))
 
 (defn redirect-to-link-handler [request]
