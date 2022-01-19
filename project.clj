@@ -7,8 +7,9 @@
                  [metosin/reitit-ring "0.5.15"]
                  [mount "0.1.16"]
                  [migratus "1.3.5"]
-                 [com.github.seancorfield/next.jdbc "1.2.761"]
-                 [org.postgresql/postgresql "42.3.1"]]
+                 [org.clojure/java.jdbc "0.7.12"]
+                 [org.postgresql/postgresql "42.3.1"]
+                 [hikari-cp "2.13.0"]]
   :ring {:init rocket-link.app/init-app
          :handler rocket-link.app/app
          :nrepl {:start? true :port 7000}}
