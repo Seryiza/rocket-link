@@ -1,7 +1,7 @@
-# 🚀🔗: Rocket Link
+## [https://🚀🔗.ml](https://xn--qv8hrw.ml/): Rocket Link
 Emoji link for your link
 
-## Идеи
+### Идеи
 - Главная страница для создания эмодзи-ссылки
 - Переход по ссылкам
 - Регистрация и список своих ссылок
