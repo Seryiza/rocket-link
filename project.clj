@@ -20,5 +20,5 @@
 
   :migratus {:store :database
              :migration-dir "migrations"
-             :db ~(-> "config.edn" slurp clojure.edn/read-string :database-url)}
+             :db ~(str "jdbc:" (System/getenv "DATABASE_URL"))}
   :plugins [[migratus-lein "0.7.3"]])
