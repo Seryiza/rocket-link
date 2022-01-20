@@ -20,5 +20,5 @@
 
   :migratus {:store :database
              :migration-dir "migrations"
-             :db ~(str "jdbc:" (System/getenv "DATABASE_URL"))}
+             :db ~(System/getenv "DATABASE_URL")}
   :plugins [[migratus-lein "0.7.3"]])

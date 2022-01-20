@@ -5,7 +5,7 @@
 
 (defstate db
   :start (let [{database-url :database-url} config
-               pool-opts {:jdbc-url (str "jdbc:" database-url)}
+               pool-opts {:jdbc-url database-url}
                a (print database-url)
                datasource (cp/make-datasource pool-opts)]
            {:datasource datasource})
