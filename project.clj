@@ -1,6 +1,7 @@
 (defproject rocket-link "0.0.0"
   :description "Emoji link for your link"
   :resource-paths ["resources"]
+  :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [ring/ring-core "1.9.5"]
                  [ring/ring-jetty-adapter "1.9.5"]
