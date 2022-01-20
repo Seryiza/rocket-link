@@ -3,4 +3,6 @@
             [mount.core :refer [defstate]]))
 
 (defstate config
-  :start (-> "config.edn" slurp edn/read-string))
+  :start {:http-port (System/getenv "PORT")
+          :base-url (System/getenv "BASE_URL")
+          :database-url (System/getenv "DATABASE_URL")})

@@ -12,11 +12,12 @@
                  [org.postgresql/postgresql "42.3.1"]
                  [hikari-cp "2.13.0"]
                  [selmer "1.12.49"]]
-  :ring {:init rocket-link.app/init-app
-         :handler rocket-link.app/app
-         :nrepl {:start? true :port 7000}}
+
+  :main rocket-link.server
+  :uberjar-name "rocket-link.jar"
+  :profiles {:uberjar {:aot :all}}
+
   :migratus {:store :database
              :migration-dir "migrations"
              :db ~(-> "config.edn" slurp clojure.edn/read-string :database-url)}
-  :plugins [[lein-ring "0.12.6"]
-            [migratus-lein "0.7.3"]])
+  :plugins [[migratus-lein "0.7.3"]])

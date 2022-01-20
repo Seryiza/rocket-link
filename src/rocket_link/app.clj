@@ -6,9 +6,6 @@
             [reitit.ring :as ring]
             [ring.util.response :refer [redirect]]))
 
-(defn init-app []
-  (mount/start))
-
 (defn make-project-url [& components]
   (apply str (:base-url config) components))
 

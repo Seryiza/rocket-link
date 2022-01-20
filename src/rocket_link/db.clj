@@ -4,7 +4,9 @@
             [rocket-link.config :refer [config]]))
 
 (defstate db
-  :start (let [{pool-opts :pool} config
+  :start (let [{database-url :database-url} config
+               pool-opts {:jdbc-url (str "jdbc:" database-url)}
+               a (print database-url)
                datasource (cp/make-datasource pool-opts)]
            {:datasource datasource})
   :stop (-> db :datasource cp/close-datasource))
