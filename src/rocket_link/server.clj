@@ -9,5 +9,5 @@
   (mount/start))
 
 (defstate http-server
-  :start (run-jetty app {:port (-> config :http-port Integer/parseInt)
+  :start (run-jetty app {:port (:http-port config)
                          :join? false}))
