@@ -4,7 +4,6 @@
             [ring.util.response :refer [content-type]]))
 
 (html/set-resource-path! (clojure.java.io/resource "html"))
-(print (clojure.java.io/resource ""))
 
 (defn render [request template-name & [params]]
   {:status 200
