@@ -17,3 +17,9 @@ jobs:
 
     - name: Run tests
       run: lein test
+
+    - name: Push to dokku
+      uses: dokku/github-action@master
+      with:
+        git_remote_url: ${{ secrets.DOKKU_GIT_URL }}
+        ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
