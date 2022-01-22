@@ -6,4 +6,9 @@ setup:
 test:
 	lein test
 
-ci: setup test
+ci: test
+
+docker-ci:
+	docker-compose -f ci/docker-compose.yml -p rocket-link-ci build
+	docker-compose -f ci/docker-compose.yml -p rocket-link-ci run app make setup
+	docker-compose -f ci/docker-compose.yml -p rocket-link-ci run app make ci
