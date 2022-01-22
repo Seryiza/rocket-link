@@ -1,4 +1,4 @@
-name: Rocket Link CI
+name: Test and Build
 
 on:
   push:
