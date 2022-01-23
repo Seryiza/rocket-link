@@ -4,5 +4,5 @@
 
 (defstate config
   :start {:http-port (Integer/parseInt (System/getenv "PORT"))
-          :base-url (System/getenv "BASE_URL")
+          :base-domain (System/getenv "BASE_DOMAIN")
           :database-url (System/getenv "DATABASE_URL")})

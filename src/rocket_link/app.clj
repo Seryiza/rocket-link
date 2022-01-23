@@ -1,19 +1,32 @@
 (ns rocket-link.app
   (:require [rocket-link.config :refer [config]]
-            [rocket-link.links.links :refer [get-link-by-code-name]]
+            [rocket-link.links.links :refer [get-link-by-code-name create-link!]]
             [rocket-link.html :refer [render]]
+            [rocket-link.emoji.emoji-generator :refer [generate-emojis-by-id]]
             [mount.core :as mount :refer [defstate]]
             [reitit.ring :as ring]
-            [ring.util.response :refer [redirect]]))
+            [ring.middleware.params :refer [wrap-params]]
+            [ring.middleware.keyword-params :refer [wrap-keyword-params]]
+            [ring.util.response :refer [redirect]])
+  (:import [java.net URLEncoder IDN]))
+
+(defn url-encode [text]
+  (URLEncoder/encode text "UTF-8"))
+
+(defn punycode-encode [text]
+  (IDN/toASCII text IDN/ALLOW_UNASSIGNED))
 
 (defn make-project-url [& components]
-  (apply str (:base-url config) components))
+  (apply str "https://" (-> config :base-domain punycode-encode) components))
 
 (defn index-page-handler [request]
   (render request "index.html"))
 
 (defn create-link-handler [request]
-  {:status 200, :body "here you are"})
+  (let [url (-> request :params :url)
+        created-shortcut (create-link! url generate-emojis-by-id)
+        created-link-url (make-project-url "/links/" (url-encode created-shortcut) "/created")]
+    (redirect created-link-url)))
 
 (defn show-created-link-handler [request]
   (let [code-name (-> request :path-params :code-name)
@@ -34,5 +47,7 @@
              ["/to/:code-name" redirect-to-link-handler]
              ["/links" {:post create-link-handler}]
              ["/links/:code-name" ["/created" show-created-link-handler]]])
-          (ring/create-default-handler)))
+          (ring/create-default-handler)
+          {:middleware [wrap-params
+                        wrap-keyword-params]}))
 
