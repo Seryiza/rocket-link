@@ -8,6 +8,11 @@
 (defn -main []
   (mount/start))
 
+(defn reset []
+  (mount/stop)
+  (mount/start))
+
 (defstate http-server
   :start (run-jetty app {:port (:http-port config)
-                         :join? false}))
+                         :join? false})
+  :stop (.stop http-server))
