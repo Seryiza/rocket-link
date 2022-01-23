@@ -1,6 +1,8 @@
 ## [https://🚀🔗.ml](https://xn--qv8hrw.ml/): Rocket Link
 [![Test and Build](https://github.com/Seryiza/rocket-link/actions/workflows/test-and-build.yml/badge.svg)](https://github.com/Seryiza/rocket-link/actions/workflows/test-and-build.yml)
 
+![Main page screenshot](./.github/main_page_screenshot.png)
+
 Emoji link for your link
 
 ### Идеи возможностей
