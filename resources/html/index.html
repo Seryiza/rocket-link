@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rocket Link: Create emoji link for your link</title>
-</head>
-<body>
-    <form action="/links" method="POST">
+{% extends "base.html" %}
+{% block content %}
+
+<form action="/links" method="POST">
+    <label>
+        URL
         <input type="text" name="url" placeholder="https://some-long-long-address.com">
-        <button type="submit">Emojify</button>
-    </form>
-</body>
-</html>
+    </label>
+    <button type="submit">Emojify</button>
+</form>
+
+{% endblock %}
+

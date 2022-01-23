@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rocket Link</title>
-</head>
-<body>
-    You created link! Here you are: <a href="{{created-link}}">{{created-link}}</a>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+
+<div>You created link! Here you are:</div>
+<div>
+    <mark>
+        <a href="{{created-link}}">{{created-link}}</a>
+    </mark>
+</div>
+
+{% endblock %}
+
