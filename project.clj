@@ -1,6 +1,7 @@
 (defproject rocket-link "0.0.0"
   :description "Emoji link for your link"
   :resource-paths ["resources"]
+  :source-paths ["src"]
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [ring/ring-core "1.9.5"]
@@ -14,9 +15,11 @@
                  [hikari-cp "2.13.0"]
                  [selmer "1.12.49"]]
 
-  :main rocket-link.server
-  :uberjar-name "rocket-link.jar"
-  :profiles {:uberjar {:aot :all}}
+  :profiles {:uberjar {:main rocket-link.server
+                       :uberjar-name "rocket-link.jar"
+                       :aot :all}
+             :dev {:source-paths ["dev"]
+                   :dependencies [[org.clojure/tools.namespace "1.2.0"]]}}
 
   :migratus {:store :database
              :migration-dir "migrations"

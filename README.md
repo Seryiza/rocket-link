@@ -7,6 +7,22 @@ https://🚀🔗.ml/to/😆 ➔ https://github.com/Seryiza/rocket-link/stargazer
 
 ![Main page screenshot](./.github/main_page_screenshot.png)
 
+### How to develop it
+Project requires [Leiningen](https://leiningen.org/) (2.0.0+).
+
+```
+export PORT=3000
+export BASE_DOMAIN=localhost:3000
+export DATABASE_URL=postgresql://postgres:pass@localhost:54320/rocket_link
+
+$ lein repl
+user=> (dev)            ; Enter to development namespace
+rocket-repl=> (start)   ; Start systems (db connection, http server...)
+rocket-repl=> (restart) ; Reload changed namespaces and restart systems
+```
+
+See also: [Clojure Workflow Reloaded](https://cognitect.com/blog/2013/06/04/clojure-workflow-reloaded), [Mount REPL](https://github.com/tolitius/mount#running-new-york-stock-exchange)
+
 ### Идеи возможностей
 - ~~Главная страница для создания эмодзи-ссылки~~
 - ~~Переход по ссылкам~~

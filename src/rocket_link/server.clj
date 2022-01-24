@@ -5,12 +5,14 @@
             [ring.adapter.jetty :refer [run-jetty]])
   (:gen-class))
 
-(defn -main []
+(defn start []
   (mount/start))
 
-(defn reset []
-  (mount/stop)
-  (mount/start))
+(defn stop []
+  (mount/stop))
+
+(defn -main []
+  (start))
 
 (defstate http-server
   :start (run-jetty app {:port (:http-port config)
