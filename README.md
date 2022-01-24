@@ -15,6 +15,8 @@ export PORT=3000
 export BASE_DOMAIN=localhost:3000
 export DATABASE_URL=postgresql://postgres:pass@localhost:54320/rocket_link
 
+$ lein deps
+$ lein migratus migrate
 $ lein repl
 user=> (dev)            ; Enter to development namespace
 rocket-repl=> (start)   ; Start systems (db connection, http server...)
