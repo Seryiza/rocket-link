@@ -1,9 +1,8 @@
 (ns rocket-link.html
   (:require [selmer.parser :as html]
-            [clojure.java.io]
-            [ring.util.response :refer [content-type]]))
+            [clojure.java.io :as io]))
 
-(html/set-resource-path! (clojure.java.io/resource "html"))
+(html/set-resource-path! (io/resource "html"))
 
 (defn render [request template-name & [params]]
   {:status 200

@@ -2,10 +2,10 @@
   (:require [rocket-link.db :refer [db]]
             [clojure.java.jdbc :as jdbc]))
 
-(defn get-link-by-code-name [code-name]
+(defn find-by-code-name [code-name]
   (first (jdbc/query db ["SELECT * FROM links WHERE code_name = ?" code-name])))
 
-(defn create-link! [url get-code-name-fn]
+(defn create! [url get-code-name-fn]
   (jdbc/with-db-transaction [transation db]
     (let [link-without-code-name (first (jdbc/insert! transation :links {:url url}))
           link-id (:id link-without-code-name)

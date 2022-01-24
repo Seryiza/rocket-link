@@ -2,7 +2,7 @@
   (:require [rocket-link.app :refer [app]]
             [rocket-link.config :refer [config]]
             [mount.core :as mount :refer [defstate]]
-            [ring.adapter.jetty :refer [run-jetty]])
+            [ring.adapter.jetty :as ring-jetty])
   (:gen-class))
 
 (defn start []
@@ -15,6 +15,6 @@
   (start))
 
 (defstate http-server
-  :start (run-jetty app {:port (:http-port config)
+  :start (ring-jetty/run-jetty app {:port (:http-port config)
                          :join? false})
   :stop (.stop http-server))

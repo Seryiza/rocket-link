@@ -1,6 +1,5 @@
 (ns rocket-link.config
-  (:require [clojure.edn :as edn]
-            [mount.core :refer [defstate]]))
+  (:require [mount.core :refer [defstate]]))
 
 (defstate config
   :start {:http-port (Integer/parseInt (System/getenv "PORT"))

@@ -1,5 +1,5 @@
 (ns rocket-link.emoji.emoji-generator
-  (:require [clojure.string :refer [join]]
+  (:require [clojure.string :as str]
             [mount.core :refer [defstate]]
             [clojure.java.io :as io]))
 
@@ -19,7 +19,7 @@
   (->> id
        (get-emojis-indexes (count emojis))
        (map emojis)
-       join))
+       str/join))
 
 (defn generate-emojis-by-id [id]
   (get-emojis-by-id all-emojis id))
