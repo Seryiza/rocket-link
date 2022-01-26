@@ -32,7 +32,7 @@
 
 (defn redirect-to-link-handler [request]
   (let [code-name (-> request :path-params :code-name)
-        link (links/find-by-code-name code-name)]
+        link (links/find-by-shortcut code-name)]
     (if (nil? link)
       {:status 404, :body "Oh, non-existing URL"}
       (punycode/redirect (:url link)))))
