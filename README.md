@@ -43,3 +43,6 @@ See also: [Clojure Workflow Reloaded](https://cognitect.com/blog/2013/06/04/cloj
 - Добавить проверку корректности URL (+ частичное исправление вида "добавить https://")
 - Добавить обработку ошибок 5xx (Sentry?)
 - Добавить случайное перемешивание, чтобы не быть в порядке возрастания Unicode Emoji
+- Сделать punycode/redirect как middleware (и использовать ring redirect)
+- Сохранить Pico.css как локальную зависимость
+- Добавить информацию для SEO
