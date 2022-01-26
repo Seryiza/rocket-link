@@ -47,3 +47,4 @@ See also: [Clojure Workflow Reloaded](https://cognitect.com/blog/2013/06/04/cloj
 - Сделать punycode/redirect как middleware (и использовать ring redirect)
 - Сохранить Pico.css как локальную зависимость
 - Добавить информацию для SEO
+- Добавить favicon
