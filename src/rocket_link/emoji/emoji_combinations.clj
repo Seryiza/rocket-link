@@ -1,4 +1,4 @@
-(ns rocket-link.emoji.emoji-generator
+(ns rocket-link.emoji.emoji-combinations
   (:require [clojure.string :as str]
             [mount.core :refer [defstate]]
             [clojure.java.io :as io]))
@@ -6,7 +6,7 @@
 (defstate all-emojis
   :start (-> "emoji/emoji-codes.edn" io/resource slurp read-string))
 
-(defn get-emojis-indexes [emojis-count id]
+(defn break-id-into-emoji-indexes [emojis-count id]
   (loop [current-id (dec id)
          indexes []]
     (let [next-id       (quot current-id emojis-count)
@@ -15,11 +15,11 @@
         (recur next-id (conj indexes current-index))
         (conj indexes current-index)))))
 
-(defn get-emojis-by-id [emojis id]
+(defn get-emojis-combination [emojis id]
   (->> id
-       (get-emojis-indexes (count emojis))
+       (break-id-into-emoji-indexes (count emojis))
        (map emojis)
        str/join))
 
-(defn generate-emojis-by-id [id]
-  (get-emojis-by-id all-emojis id))
+(defn get-combination-from-all-emojies [id]
+  (get-emojis-combination all-emojis id))

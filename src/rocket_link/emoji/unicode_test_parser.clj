@@ -1,4 +1,4 @@
-(ns rocket-link.emoji.emoji-generator
+(ns rocket-link.emoji.unicode-test-parser
   (:require [clojure.java.io :as io]
             [clojure.string :refer [starts-with? includes? split trim join]]))
 

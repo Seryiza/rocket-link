@@ -2,7 +2,7 @@
   (:require [rocket-link.config :refer [config]]
             [rocket-link.links.links :as links]
             [rocket-link.html :as html]
-            [rocket-link.emoji.emoji-generator :as emoji]
+            [rocket-link.emoji.emoji-combinations :as emoji]
             [rocket-link.punycode :as punycode]
             [mount.core :as mount :refer [defstate]]
             [reitit.ring :as ring]
@@ -21,7 +21,7 @@
 
 (defn create-link-handler [request]
   (let [url (-> request :params :url)
-        created-shortcut (links/create! url emoji/generate-emojis-by-id)
+        created-shortcut (links/create! url emoji/get-combination-from-all-emojies)
         created-link-url (make-project-url "/links/" (url-encode created-shortcut) "/created")]
     (punycode/redirect created-link-url)))
 
