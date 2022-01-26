@@ -26,13 +26,13 @@
     (punycode/redirect created-link-url)))
 
 (defn show-created-link-handler [request]
-  (let [code-name (-> request :path-params :code-name)
-        created-link (make-project-url "/to/" code-name)]
+  (let [shortcut (-> request :path-params :shortcut)
+        created-link (make-project-url "/to/" shortcut)]
     (html/render request "links/created.html" {:created-link created-link})))
 
 (defn redirect-to-link-handler [request]
-  (let [code-name (-> request :path-params :code-name)
-        link (links/find-by-shortcut code-name)]
+  (let [shortcut (-> request :path-params :shortcut)
+        link (links/find-by-shortcut shortcut)]
     (if (nil? link)
       {:status 404, :body "Oh, non-existing URL"}
       (punycode/redirect (:url link)))))
@@ -41,9 +41,9 @@
   :start (ring/ring-handler
           (ring/router
             [["/" index-page-handler]
-             ["/to/:code-name" redirect-to-link-handler]
+             ["/to/:shortcut" redirect-to-link-handler]
              ["/links" {:post create-link-handler}]
-             ["/links/:code-name" ["/created" show-created-link-handler]]])
+             ["/links/:shortcut" ["/created" show-created-link-handler]]])
           (ring/create-default-handler)
           {:middleware [wrap-params
                         wrap-keyword-params]}))
