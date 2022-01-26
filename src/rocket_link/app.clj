@@ -1,20 +1,13 @@
 (ns rocket-link.app
-  (:require [rocket-link.config :refer [config]]
-            [rocket-link.links.links :as links]
+  (:require [rocket-link.links.links :as links]
             [rocket-link.html :as html]
             [rocket-link.emoji.emoji-combinations :as emoji]
             [rocket-link.punycode :as punycode]
+            [rocket-link.url :as url]
             [mount.core :as mount :refer [defstate]]
             [reitit.ring :as ring]
             [ring.middleware.params :refer [wrap-params]]
-            [ring.middleware.keyword-params :refer [wrap-keyword-params]])
-  (:import [java.net URLEncoder]))
-
-(defn url-encode [text]
-  (URLEncoder/encode text "UTF-8"))
-
-(defn make-project-url [& components]
-  (apply str "https://" (:base-domain config) components))
+            [ring.middleware.keyword-params :refer [wrap-keyword-params]]))
 
 (defn index-page-handler [request]
   (html/render request "index.html"))
@@ -22,12 +15,12 @@
 (defn create-link-handler [request]
   (let [url (-> request :params :url)
         created-shortcut (links/create! url emoji/get-combination-from-all-emojies)
-        created-link-url (make-project-url "/links/" (url-encode created-shortcut) "/created")]
+        created-link-url (url/make-project-url "/links/" (url/encode created-shortcut) "/created")]
     (punycode/redirect created-link-url)))
 
 (defn show-created-link-handler [request]
   (let [shortcut (-> request :path-params :shortcut)
-        created-link (make-project-url "/to/" shortcut)]
+        created-link (url/make-project-url "/to/" shortcut)]
     (html/render request "links/created.html" {:created-link created-link})))
 
 (defn redirect-to-link-handler [request]
