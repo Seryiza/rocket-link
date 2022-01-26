@@ -10,8 +10,6 @@
     (let [link-without-shortcut (first (jdbc/insert! transation :links {:url url}))
           link-id (:id link-without-shortcut)
           shortcut (shortcut-fn link-id)]
-      (jdbc/execute! transation ["UPDATE links SET shortcut = ? WHERE id = ?"
-                                 shortcut
-                                 link-id])
+      (jdbc/execute! transation ["UPDATE links SET shortcut = ? WHERE id = ?" shortcut link-id])
       shortcut)))
 
