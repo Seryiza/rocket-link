@@ -64,3 +64,4 @@ And restart changed namespaces by default mapping `<localleader>rr`. See [Conjur
 - Добавить трекинг посещаемости
 - Добавить приёмочные тесты
 - Добавить поддержу нескольких языков
+- Добавить красивую 404
