@@ -37,7 +37,9 @@
              ["/to/:shortcut" redirect-to-link-handler]
              ["/links" {:post create-link-handler}]
              ["/links/:shortcut" ["/created" show-created-link-handler]]])
-          (ring/create-default-handler)
+          (ring/routes
+            (ring/create-resource-handler {:path "/assets"})
+            (ring/create-default-handler))
           {:middleware [wrap-params
                         wrap-keyword-params]}))
 
