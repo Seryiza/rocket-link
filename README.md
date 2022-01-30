@@ -25,6 +25,15 @@ rocket-repl=> (restart) ; Reload changed namespaces and restart systems
 
 See also: [Clojure Workflow Reloaded](https://cognitect.com/blog/2013/06/04/clojure-workflow-reloaded), [Mount REPL](https://github.com/tolitius/mount#running-new-york-stock-exchange)
 
+#### Neovim
+If you use [Neovim](https://neovim.io/) and [Conjure](https://github.com/Olical/conjure), you can configurate your init.lua like this:
+
+```lua
+vim.g['conjure#client#clojure#nrepl#refresh#after'] = 'rocket-repl/restart'
+```
+
+And restart changed namespaces by default mapping `<localleader>rr`. See [Conjure doc](https://github.com/Olical/conjure/blob/master/doc/conjure-client-clojure-nrepl.txt). It's very cool!
+
 ### Идеи возможностей
 - ~~Главная страница для создания эмодзи-ссылки~~
 - ~~Переход по ссылкам~~

@@ -1,8 +1,8 @@
 (ns rocket-repl
   (:require [rocket-link.server :as rocket-link]
-            [clojure.tools.namespace.repl :refer [refresh set-refresh-dirs]]))
+            [clojure.tools.namespace.repl :as repl]))
 
-(set-refresh-dirs "src")
+(repl/set-refresh-dirs "src")
 
 (defn start []
   (rocket-link/start))
@@ -12,4 +12,8 @@
 
 (defn restart []
   (stop)
-  (refresh :after 'rocket-link.server/start))
+  (start))
+
+(defn refresh []
+  (stop)
+  (repl/refresh :after 'rocket-link.server/start))
