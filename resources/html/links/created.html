@@ -1,12 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div>You created link! Here you are:</div>
-<div>
-    <mark>
-        <a href="{{created-link}}">{{created-link}}</a>
-    </mark>
+<section>
+    <div>You created link! Here you are:</div>
+    <div>
+        <mark>
+            <a href="{{created-link}}">{{created-link}}</a>
+        </mark>
+    </div>
+</section>
+
+<div class="grid">
+    <button data-link="{{created-link}}" class="link-copy-button">Copy</button>
+    <button data-link="{{created-link}}" class="link-share-button hide">Share</button>
 </div>
 
 {% endblock %}
 
+{% block scripts %}
+<script src="/assets/js/links/created.js"></script>
+{% endblock %}
