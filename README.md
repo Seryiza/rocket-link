@@ -5,8 +5,10 @@ Service to create short emoji link for your long-long link.
 
 https://🚀🔗.ml/to/😆 ➔ https://github.com/Seryiza/rocket-link/stargazers
 
-<img alt="main page screenshot" src="./.github/main-page-screenshot.jpg" width="45%">
-<img alt="created link page screenshot" src="./.github/created-link-page-screenshot.jpg" width="45%">
+<div>
+  <img alt="main page screenshot" src="./.github/main-page-screenshot.jpg" width="30%">
+  <img alt="created link page screenshot" src="./.github/created-link-page-screenshot.jpg" width="30%">
+</div>
 
 ### How to develop it
 Project requires [Leiningen](https://leiningen.org/) (2.0.0+).
