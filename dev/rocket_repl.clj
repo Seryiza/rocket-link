@@ -1,8 +1,10 @@
 (ns rocket-repl
   (:require [rocket-link.server :as rocket-link]
-            [clojure.tools.namespace.repl :as repl]))
+            [clojure.tools.namespace.repl :as repl]
+            [selmer.parser :as html]))
 
 (repl/set-refresh-dirs "src")
+(html/cache-off!)
 
 (defn start []
   (rocket-link/start))
