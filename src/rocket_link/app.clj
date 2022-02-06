@@ -4,10 +4,12 @@
             [rocket-link.emoji.emoji-combinations :as emoji]
             [rocket-link.punycode :as punycode]
             [rocket-link.url :as url]
+            [rocket-link.user.user :as user]
             [mount.core :as mount :refer [defstate]]
             [reitit.ring :as ring]
             [ring.middleware.params :refer [wrap-params]]
-            [ring.middleware.keyword-params :refer [wrap-keyword-params]]))
+            [ring.middleware.keyword-params :refer [wrap-keyword-params]]
+            [ring.middleware.session :refer [wrap-session]]))
 
 (defn index-page-handler [request]
   (html/render request "index.html"))
@@ -30,16 +32,30 @@
       {:status 404, :body "Oh, non-existing URL"}
       (punycode/redirect (:url link)))))
 
+(defn login-page-handler [request]
+  (html/render request "users/login.html"))
+
+(defn login-handler [request]
+  (let [{:keys [params session]} request
+        {:keys [email password]} params]
+    (if (user/can-login? email password)
+      (-> (punycode/redirect (url/make-project-url "/"))
+          (assoc :session (assoc session :user {:email email, :password password})))
+      (html/render request "users/login.html" {:params params}))))
+
 (defstate app
   :start (ring/ring-handler
           (ring/router
             [["/" index-page-handler]
              ["/to/:shortcut" redirect-to-link-handler]
              ["/links" {:post create-link-handler}]
-             ["/links/:shortcut" ["/created" show-created-link-handler]]])
+             ["/links/:shortcut" ["/created" show-created-link-handler]]
+             ["/login" {:get login-page-handler
+                        :post login-handler}]])
           (ring/routes
             (ring/create-resource-handler {:path "/assets"})
             (ring/create-default-handler))
           {:middleware [wrap-params
-                        wrap-keyword-params]}))
+                        wrap-keyword-params
+                        wrap-session]}))
 

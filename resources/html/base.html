@@ -13,6 +13,14 @@
         <ul>
             <li><strong><a href="/">🚀🔗: Rocket Link</a></strong></li>
         </ul>
+        <ul>
+            {% if not is-logged-in %}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            {% else %}
+            <li><a href="/my/links">My links</a></li>
+            {% endif %}
+        </ul>
     </nav>
     <section class="container">
         <article>

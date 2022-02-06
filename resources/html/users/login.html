@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="" method="POST">
+    <label>
+        Email
+        <input type="email" name="email" value="{{params.email}}">
+    </label>
+    <label>
+        Password
+        <input type="password" name="password" value="{{params.password}}">
+    </label>
+    <button>
+        Login
+    </button>
+</form>
+
+{% endblock %}

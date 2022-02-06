@@ -13,7 +13,8 @@
                  [org.clojure/java.jdbc "0.7.12"]
                  [org.postgresql/postgresql "42.3.1"]
                  [hikari-cp "2.13.0"]
-                 [selmer "1.12.49"]]
+                 [selmer "1.12.49"]
+                 [buddy/buddy-hashers "1.8.158"]]
 
   :profiles {:uberjar {:main rocket-link.server
                        :uberjar-name "rocket-link.jar"
