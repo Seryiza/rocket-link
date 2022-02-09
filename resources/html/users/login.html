@@ -15,6 +15,7 @@
             type="email"
             name="email"
             value="{{params.email}}"
+            required
             {% if errors.email %} aria-invalid="true" {% endif %}>
     </label>
     <label>
@@ -29,6 +30,7 @@
         <input
             type="password"
             name="password"
+            required
             {% if errors.password %} aria-invalid="true" {% endif %}>
     </label>
     <button>
