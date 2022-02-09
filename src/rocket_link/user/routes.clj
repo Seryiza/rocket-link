@@ -21,6 +21,11 @@
         (html/render request "users/login.html" {:params params
                                                  :errors [(message/get-message :user/cannot-login)]})))))
 
+(defn logout-handler [request]
+  (let [{:keys [session]} request]
+    (-> (punycode/redirect (url/make-project-url "/"))
+        (assoc :session (assoc session :user nil)))))
+
 (defn show-register-handler [request]
   (html/render request "users/register.html"))
 
