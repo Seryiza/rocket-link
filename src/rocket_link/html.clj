@@ -6,7 +6,9 @@
 
 (defn render [request template-name & [params]]
   (let [user (-> request :session :user)
-        complemented-params (merge {:is-logged-in (nil? user)}
+        errors (-> request :flash :errors (or []))
+        complemented-params (merge {:is-logged-in (not-empty user)
+                                    :errors errors}
                                    params)]
     {:status 200
      :headers {"Content-Type" "text/html; charset=utf-8"}

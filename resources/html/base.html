@@ -24,6 +24,12 @@
     </nav>
     <section class="container">
         <article>
+            {% for error in errors %}
+                <p>
+                    <mark>{{ error }}</mark>
+                </p>
+            {% endfor %}
+
             {% block content %}
             {% endblock %}
         </article>
