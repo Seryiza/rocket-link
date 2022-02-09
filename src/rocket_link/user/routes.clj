@@ -3,23 +3,26 @@
             [rocket-link.punycode :as punycode]
             [rocket-link.url :as url]
             [rocket-link.user.user :as user]
-            [rocket-link.message :as message]))
+            [rocket-link.message :as message]
+            [struct.core :as st]))
+
+(def login-message
+  {:email [st/required st/email]
+   :password [st/required st/string]})
 
 (defn show-login-handler [request]
   (html/render request "users/login.html"))
 
 (defn login-handler [request]
   (let [{:keys [params session]} request
-        {:keys [email password]} params
-        user-data {:email email, :password password}
-        validation-errors (message/get-explain-messages :user/user user-data)]
-    (if (not-empty validation-errors)
-      (html/render request "users/login.html" {:params params :errors validation-errors})
-      (if (user/can-login? email password)
+        [errors user-data] (st/validate params login-message)]
+    (if (not-empty errors)
+      (html/render request "users/login.html" {:params params :errors errors})
+      (if (user/can-login? user-data)
         (-> (punycode/redirect (url/make-project-url "/"))
             (assoc :session (assoc session :user user-data)))
         (html/render request "users/login.html" {:params params
-                                                 :errors [(message/get-message :user/cannot-login)]})))))
+                                                 :messages [(message/get-message :user/cannot-login)]})))))
 
 (defn logout-handler [request]
   (let [{:keys [session]} request]
@@ -31,14 +34,10 @@
 
 (defn register-handler [request]
   (let [{:keys [params session]} request
-        {:keys [email password]} params
-        user-data {:email email :password password}
-        validation-errors (message/get-explain-messages :user/user user-data)]
-    (if (not-empty validation-errors)
-      (html/render request "users/register.html" {:params params
-                                                  :errors validation-errors})
+        [errors user-data] (st/validate params login-message)]
+    (if (not-empty errors)
+      (html/render request "users/register.html" {:params params :errors errors})
       (do
         (user/create! user-data)
         (-> (punycode/redirect (url/make-project-url "/"))
-            (assoc :session (assoc session :user user-data))))
-      )))
+            (assoc :session (assoc session :user user-data)))))))

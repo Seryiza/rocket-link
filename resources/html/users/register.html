@@ -4,11 +4,34 @@
 <form action="" method="POST">
     <label>
         Email
-        <input type="email" name="email" value="{{params.email}}" required>
+
+        {% if errors.email %}
+            <div>
+                <mark>{{ errors.email }}</mark>
+            </div>
+        {% endif %}
+
+        <input
+            type="email"
+            name="email"
+            value="{{params.email}}"
+            required
+            {% if errors.email %} aria-invalid="true" {% endif %}>
     </label>
     <label>
         Password
-        <input type="password" name="password" required>
+
+        {% if errors.password %}
+            <div>
+                <mark>{{ errors.password }}</mark>
+            </div>
+        {% endif %}
+
+        <input
+            type="password"
+            name="password"
+            required
+            {% if errors.password %} aria-invalid="true" {% endif %}>
     </label>
     <button>
         Create account

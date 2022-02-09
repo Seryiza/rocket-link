@@ -14,7 +14,8 @@
                  [org.postgresql/postgresql "42.3.1"]
                  [hikari-cp "2.13.0"]
                  [selmer "1.12.49"]
-                 [buddy/buddy-hashers "1.8.158"]]
+                 [buddy/buddy-hashers "1.8.158"]
+                 [funcool/struct "1.4.0"]]
 
   :profiles {:uberjar {:main rocket-link.server
                        :uberjar-name "rocket-link.jar"

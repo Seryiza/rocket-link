@@ -6,7 +6,6 @@
             [clojure.string :as str]
             [clojure.spec.alpha :as s]))
 
-
 (s/def :user/email (s/and :common-specs/ne-string
                           #(re-matches #"^\S+\@\S+\.\S+$" %)))
 (s/def :user/password :common-specs/ne-string)
@@ -19,7 +18,7 @@
 (defn has-user-this-password? [user check-password]
   (:valid (hashers/verify check-password (:password user))))
 
-(defn can-login? [email password]
+(defn can-login? [{:keys [email password]}]
   (if-let [user (find-by-email email)]
     (has-user-this-password? user password)
     false))

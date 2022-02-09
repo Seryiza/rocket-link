@@ -25,9 +25,9 @@
     </nav>
     <section class="container">
         <article>
-            {% for error in errors %}
+            {% for message in messages %}
                 <p>
-                    <mark>{{ error }}</mark>
+                    <mark>{{ message }}</mark>
                 </p>
             {% endfor %}
 
