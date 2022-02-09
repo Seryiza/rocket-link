@@ -1,11 +1,7 @@
 (ns rocket-link.app
-  (:require [rocket-link.links.links :as links]
-            [rocket-link.html :as html]
-            [rocket-link.emoji.emoji-combinations :as emoji]
-            [rocket-link.punycode :as punycode]
-            [rocket-link.url :as url]
-            [rocket-link.user.user :as user]
-            [rocket-link.message :as message]
+  (:require [rocket-link.main-page.routes :as main-page-routes]
+            [rocket-link.links.routes :as links-routes]
+            [rocket-link.user.routes :as user-routes]
             [mount.core :as mount :refer [defstate]]
             [reitit.ring :as ring]
             [ring.middleware.params :refer [wrap-params]]
@@ -13,52 +9,15 @@
             [ring.middleware.session :refer [wrap-session]]
             [ring.middleware.flash :refer [wrap-flash]]))
 
-(defn index-page-handler [request]
-  (html/render request "index.html"))
-
-(defn create-link-handler [request]
-  (let [url (-> request :params :url)
-        created-shortcut (links/create! url emoji/get-combination-from-all-emojies)
-        created-link-url (url/make-project-url "/links/" (url/encode created-shortcut) "/created")]
-    (punycode/redirect created-link-url)))
-
-(defn show-created-link-handler [request]
-  (let [shortcut (-> request :path-params :shortcut)
-        created-link (url/make-project-url "/to/" shortcut)]
-    (html/render request "links/created.html" {:created-link created-link})))
-
-(defn redirect-to-link-handler [request]
-  (let [shortcut (-> request :path-params :shortcut)
-        link (links/find-by-shortcut shortcut)]
-    (if (nil? link)
-      {:status 404, :body "Oh, non-existing URL"}
-      (punycode/redirect (:url link)))))
-
-(defn login-page-handler [request]
-  (html/render request "users/login.html"))
-
-(defn login-handler [request]
-  (let [{:keys [params session]} request
-        {:keys [email password]} params
-        user-data {:email email, :password password}
-        validation-errors (message/get-explain-messages :user/user user-data)]
-    (if (not-empty validation-errors)
-      (html/render request "users/login.html" {:params params :errors validation-errors})
-      (if (user/can-login? email password)
-        (-> (punycode/redirect (url/make-project-url "/"))
-            (assoc :session (assoc session :user user-data)))
-        (html/render request "users/login.html" {:params params
-                                                 :errors [(message/get-message :user/cannot-login)]})))))
-
 (defstate app
   :start (ring/ring-handler
           (ring/router
-            [["/" index-page-handler]
-             ["/to/:shortcut" redirect-to-link-handler]
-             ["/links" {:post create-link-handler}]
-             ["/links/:shortcut" ["/created" show-created-link-handler]]
-             ["/login" {:get login-page-handler
-                        :post login-handler}]])
+            [["/" main-page-routes/show-handler]
+             ["/to/:shortcut" links-routes/redirect-to-target-handler]
+             ["/links" {:post links-routes/create-handler}]
+             ["/links/:shortcut" ["/created" links-routes/show-created-handler]]
+             ["/login" {:get user-routes/show-login-handler
+                        :post user-routes/login-handler}]])
           (ring/routes
             (ring/create-resource-handler {:path "/assets"})
             (ring/create-default-handler))
