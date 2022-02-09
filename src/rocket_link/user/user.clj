@@ -25,8 +25,7 @@
     false))
 
 (defn create! [user]
-  (let [{:keys [id email password]} user
+  (let [{:keys [email password]} user
         hashed-password (hashers/derive password)]
-    (jdbc/insert! db :users {:id id
-                             :email email
+    (jdbc/insert! db :users {:email email
                              :password hashed-password})))

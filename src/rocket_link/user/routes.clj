@@ -21,3 +21,19 @@
         (html/render request "users/login.html" {:params params
                                                  :errors [(message/get-message :user/cannot-login)]})))))
 
+(defn show-register-handler [request]
+  (html/render request "users/register.html"))
+
+(defn register-handler [request]
+  (let [{:keys [params session]} request
+        {:keys [email password]} params
+        user-data {:email email :password password}
+        validation-errors (message/get-explain-messages :user/user user-data)]
+    (if (not-empty validation-errors)
+      (html/render request "users/register.html" {:params params
+                                                  :errors validation-errors})
+      (do
+        (user/create! user-data)
+        (-> (punycode/redirect (url/make-project-url "/"))
+            (assoc :session (assoc session :user user-data))))
+      )))

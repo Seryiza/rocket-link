@@ -17,7 +17,9 @@
              ["/links" {:post links-routes/create-handler}]
              ["/links/:shortcut" ["/created" links-routes/show-created-handler]]
              ["/login" {:get user-routes/show-login-handler
-                        :post user-routes/login-handler}]])
+                        :post user-routes/login-handler}]
+             ["/register" {:get user-routes/show-register-handler
+                           :post user-routes/register-handler}]])
           (ring/routes
             (ring/create-resource-handler {:path "/assets"})
             (ring/create-default-handler))
