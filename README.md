@@ -67,3 +67,4 @@ And restart changed namespaces by default mapping `<localleader>rr`. See [Conjur
 - Добавить приёмочные тесты
 - Добавить поддержу нескольких языков
 - Добавить красивую 404
+- Добавить валидацию входных данных с помощью [struct](https://funcool.github.io/struct/latest/)
