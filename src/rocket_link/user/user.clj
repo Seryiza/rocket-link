@@ -18,10 +18,9 @@
 (defn has-user-this-password? [user check-password]
   (:valid (hashers/verify check-password (:password user))))
 
-(defn can-login? [{:keys [email password]}]
-  (if-let [user (find-by-email email)]
-    (has-user-this-password? user password)
-    false))
+(defn login [{:keys [email password]}]
+  (when-let [user (find-by-email email)]
+    (when (has-user-this-password? user password) user)))
 
 (defn create! [user]
   (let [{:keys [email password]} user

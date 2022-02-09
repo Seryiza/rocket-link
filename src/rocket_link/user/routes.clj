@@ -18,9 +18,9 @@
         [errors user-data] (st/validate params login-message)]
     (if (not-empty errors)
       (html/render request "users/login.html" {:params params :errors errors})
-      (if (user/can-login? user-data)
+      (if-let [logged-user (user/login user-data)]
         (-> (punycode/redirect (url/make-project-url "/"))
-            (assoc :session (assoc session :user user-data)))
+            (assoc :session (assoc session :user logged-user)))
         (html/render request "users/login.html" {:params params
                                                  :messages [(message/get-message :user/cannot-login)]})))))
 

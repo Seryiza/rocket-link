@@ -7,7 +7,9 @@
 
 (defn create-handler [request]
   (let [url (-> request :params :url)
-        created-shortcut (links/create! url emoji/get-combination-from-all-emojies)
+        user-id (-> request :session :user :id)
+        link {:url url :user-id user-id}
+        created-shortcut (links/create! link emoji/get-combination-from-all-emojies)
         created-link-url (url/make-project-url "/links/" (url/encode created-shortcut) "/created")]
     (punycode/redirect created-link-url)))
 
