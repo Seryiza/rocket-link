@@ -23,7 +23,7 @@ $ lein migratus migrate
 $ lein repl
 user=> (dev)            ; Enter to development namespace
 rocket-repl=> (start)   ; Start systems (db connection, http server...)
-rocket-repl=> (restart) ; Reload changed namespaces and restart systems
+rocket-repl=> (refresh) ; Reload changed namespaces and restart systems
 ```
 
 See also: [Clojure Workflow Reloaded](https://cognitect.com/blog/2013/06/04/clojure-workflow-reloaded), [Mount REPL](https://github.com/tolitius/mount#running-new-york-stock-exchange)
