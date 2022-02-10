@@ -15,6 +15,6 @@
   (start))
 
 (defstate http-server
-  :start (ring-jetty/run-jetty app {:port (:http-port config)
-                         :join? false})
+  :start (ring-jetty/run-jetty app {:port (:server-port config)
+                                    :join? false})
   :stop (.stop http-server))

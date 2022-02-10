@@ -6,5 +6,5 @@
   (URLEncoder/encode text "UTF-8"))
 
 (defn make-project-url [& components]
-  (apply str "https://" (:base-domain config) components))
+  (apply str (:project-url config) components))
 

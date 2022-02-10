@@ -15,7 +15,7 @@ Project requires [Leiningen](https://leiningen.org/) (2.0.0+).
 
 ```
 export PORT=3000
-export BASE_DOMAIN=localhost:3000
+export PROJECT_URL=http://localhost:3000
 export DATABASE_URL=postgresql://postgres:pass@localhost:54320/rocket_link
 
 $ lein deps
