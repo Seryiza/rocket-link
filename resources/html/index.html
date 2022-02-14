@@ -7,6 +7,12 @@
         <input type="text" name="url" placeholder="https://some-long-long-address.com">
     </label>
     <button type="submit">Emojify</button>
+
+    {% if is-logged-in %}
+        <p>
+            <em>Your link will be saved by user {{ user.email }}</em>
+        </p>
+    {% endif %}
 </form>
 
 {% endblock %}
