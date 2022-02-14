@@ -16,6 +16,7 @@
              ["/to/:shortcut" links/redirect-to-target-handler]
              ["/links" {:post links/create-handler}]
              ["/links/:shortcut/created" links/show-created-handler]
+             ["/my/links" {:get user/list-user-links-handler}]
              ["/login" {:get user/show-login-handler
                         :post user/login-handler}]
              ["/register" {:get user/show-register-handler

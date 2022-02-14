@@ -5,6 +5,9 @@
 (defn find-by-shortcut [shortcut]
   (first (jdbc/query db ["SELECT * FROM links WHERE shortcut = ?" shortcut])))
 
+(defn find-by-user-id [user-id]
+  (jdbc/query db ["SELECT * FROM links WHERE user_id = ?" user-id]))
+
 (defn create! [link shortcut-fn]
   (jdbc/with-db-transaction [transation db]
     (let [link-without-shortcut (first (jdbc/insert! transation :links link {:entities #(.replace % \- \_)}))

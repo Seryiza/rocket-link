@@ -8,6 +8,7 @@
   (let [user (-> request :session :user)
         errors (-> request :flash :errors (or []))
         complemented-params (merge {:is-logged-in (not-empty user)
+                                    :user user
                                     :errors errors}
                                    params)]
     {:status 200

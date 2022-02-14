@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Links for user {{ user.email }}</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Shortcut</th>
+            <th>Origin</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for link in links %}
+            <tr>
+                <td><a href="{{ link.shortcut-url }}">{{ link.shortcut-url }}</a></td>
+                <td><a href="{{ link.origin-url }}">{{ link.origin-url }}</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

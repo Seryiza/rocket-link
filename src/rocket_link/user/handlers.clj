@@ -4,6 +4,7 @@
             [rocket-link.url :as url]
             [rocket-link.user.user :as user]
             [rocket-link.message :as message]
+            [rocket-link.links.links :as links]
             [struct.core :as st]))
 
 (def login-message
@@ -41,3 +42,13 @@
         (user/create! user-data)
         (-> (punycode/redirect (url/make-project-url "/"))
             (assoc :session (assoc session :user user-data)))))))
+
+(defn- link->link-with-full-urls [{:keys [url shortcut]}]
+  {:shortcut-url (url/make-project-url "/to/" shortcut)
+   :origin-url url})
+
+(defn list-user-links-handler [request]
+  (let [user-id (-> request :session :user :id)
+        user-links (->> (links/find-by-user-id user-id)
+                       (map link->link-with-full-urls))]
+    (html/render request "users/my-links.html" {:links user-links})))
