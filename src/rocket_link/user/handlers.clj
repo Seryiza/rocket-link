@@ -1,4 +1,4 @@
-(ns rocket-link.user.routes
+(ns rocket-link.user.handlers
   (:require [rocket-link.html :as html]
             [rocket-link.punycode :as punycode]
             [rocket-link.url :as url]

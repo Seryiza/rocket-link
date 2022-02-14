@@ -1,4 +1,4 @@
-(ns rocket-link.main-page.routes
+(ns rocket-link.main-page.handlers
   (:require [rocket-link.html :as html]))
 
 (defn show-handler [request]

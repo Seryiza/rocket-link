@@ -1,4 +1,4 @@
-(ns rocket-link.links.routes
+(ns rocket-link.links.handlers
   (:require [rocket-link.links.links :as links]
             [rocket-link.html :as html]
             [rocket-link.emoji.emoji-combinations :as emoji]

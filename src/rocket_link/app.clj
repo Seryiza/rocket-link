@@ -1,7 +1,7 @@
 (ns rocket-link.app
-  (:require [rocket-link.main-page.routes :as main-page-routes]
-            [rocket-link.links.routes :as links-routes]
-            [rocket-link.user.routes :as user-routes]
+  (:require [rocket-link.main-page.handlers :as main-page]
+            [rocket-link.links.handlers :as links]
+            [rocket-link.user.handlers :as user]
             [mount.core :as mount :refer [defstate]]
             [reitit.ring :as ring]
             [ring.middleware.params :refer [wrap-params]]
@@ -12,15 +12,15 @@
 (defstate app
   :start (ring/ring-handler
           (ring/router
-            [["/" main-page-routes/show-handler]
-             ["/to/:shortcut" links-routes/redirect-to-target-handler]
-             ["/links" {:post links-routes/create-handler}]
-             ["/links/:shortcut" ["/created" links-routes/show-created-handler]]
-             ["/login" {:get user-routes/show-login-handler
-                        :post user-routes/login-handler}]
-             ["/register" {:get user-routes/show-register-handler
-                           :post user-routes/register-handler}]
-             ["/logout" user-routes/logout-handler]])
+            [["/" main-page/show-handler]
+             ["/to/:shortcut" links/redirect-to-target-handler]
+             ["/links" {:post links/create-handler}]
+             ["/links/:shortcut" ["/created" links/show-created-handler]]
+             ["/login" {:get user/show-login-handler
+                        :post user/login-handler}]
+             ["/register" {:get user/show-register-handler
+                           :post user/register-handler}]
+             ["/logout" user/logout-handler]])
           (ring/routes
             (ring/create-resource-handler {:path "/assets"})
             (ring/create-default-handler))
