@@ -68,3 +68,4 @@ And restart changed namespaces by default mapping `<localleader>rr`. See [Conjur
 - Добавить поддержу нескольких языков
     - Возможно, потребуется отрефакторить message.clj (вынести сообщения в мультиметоды)
 - Добавить красивую 404
+- Заиспользовать [HugSQL](https://www.hugsql.org/) для более удобного взаимодействия с БД
