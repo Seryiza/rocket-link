@@ -58,6 +58,7 @@ And restart changed namespaces by default mapping `<localleader>rr`. See [Conjur
 - Добавить обработку ошибок 5xx (Sentry?)
 - Добавить случайное перемешивание, чтобы не быть в порядке возрастания Unicode Emoji
 - Сделать punycode/redirect как middleware (и использовать ring redirect)
+    - Также добавить функции для декода пуникода (для корректного отображения origin link в `/my/links`)
 - Добавить информацию для SEO
 - Добавить favicon
 - Подумать, чтобы сделать BASE_DOMAIN опциональным
