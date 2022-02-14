@@ -12,10 +12,10 @@
 (defstate app
   :start (ring/ring-handler
           (ring/router
-            [["/" main-page/show-handler]
+            [["/" {:get main-page/show-handler}]
              ["/to/:shortcut" links/redirect-to-target-handler]
              ["/links" {:post links/create-handler}]
-             ["/links/:shortcut" ["/created" links/show-created-handler]]
+             ["/links/:shortcut/created" links/show-created-handler]
              ["/login" {:get user/show-login-handler
                         :post user/login-handler}]
              ["/register" {:get user/show-register-handler
