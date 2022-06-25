@@ -72,3 +72,5 @@ And restart changed namespaces by default mapping `<localleader>rr`. See [Conjur
 - Заиспользовать [HugSQL](https://www.hugsql.org/) для более удобного взаимодействия с БД
 - Сделать `/logout` как POST-метод
 - Сделать некоторые роуты (логин-регистрация, логаут, мои ссылки) доступными только для аутентифицированных / не-аутентифицированных)
+- Добавить фронтенд через re-frame
+- Добавить деплой через Kubernetes?
