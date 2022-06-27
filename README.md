@@ -74,3 +74,4 @@ And restart changed namespaces by default mapping `<localleader>rr`. See [Conjur
 - Сделать некоторые роуты (логин-регистрация, логаут, мои ссылки) доступными только для аутентифицированных / не-аутентифицированных)
 - Добавить фронтенд через re-frame
 - Добавить деплой через Kubernetes?
+- Переехать на deps.edn
